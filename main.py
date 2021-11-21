@@ -31,4 +31,4 @@ async def rune(ctx, arg1, arg2):
 async def opgg(ctx, arg1):
     await ctx.send('https://tr.op.gg/summoner/userName={}'.format(arg1))
 
-bot.run('OTExOTc2NjkwMzA4MjIzMDY3.YZpOeg.JM4PkWwNzK67uno55yHswziOb1w')
+bot.run('token')

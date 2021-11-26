@@ -3,6 +3,7 @@ import os
 import discord
 from discord.ext import commands
 import tierlists as t
+import builds as b
 token = os.environ['token']
 
 bot = commands.Bot(command_prefix='!')
@@ -15,10 +16,6 @@ async def pick(ctx, arg1, arg2):
 @bot.command()
 async def counter(ctx, arg1, arg2):
     await ctx.send('https://tr.op.gg/champion/{}/statistics/{}/matchup'.format(arg1, arg2))
-
-@bot.command()
-async def build(ctx, arg1, arg2):
-    await ctx.send('https://tr.op.gg/champion/{}/statistics/{}/item'.format(arg1, arg2))
 
 @bot.command()
 async def rune(ctx, arg1, arg2):
@@ -44,6 +41,11 @@ async def tierlist(ctx):
 
     await ctx.send(embed=embed)
 
+
+@bot.command()
+async def build(ctx,arg1,arg2):
+    b.items(arg1,arg2)
+    await ctx.send(file=discord.File('build.png'))
 
 keep_alive()
 

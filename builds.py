@@ -1,0 +1,51 @@
+from bs4 import BeautifulSoup
+import requests
+from PIL import Image
+import PIL
+import urllib.request
+import sys
+
+def items(arg1,arg2):
+    url = 'https://www.op.gg/champion/{}/statistics/{}'.format(arg1, arg2)
+
+    headers = {
+    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36 OPR/80.0.4170.91'
+    }
+
+
+
+    
+    result = requests.get(url, headers=headers)
+    doc= BeautifulSoup(result.content, "html.parser")
+
+    allitems = doc.find_all('td', 'champion-overview__data champion-overview__border champion-overview__border--first')
+
+    #Starting Items
+    startingitems = []
+    unwanted = "//opgg-static.akamaized.net/images/site/champion/blet.png"
+
+
+    for i in range(0, len(allitems)):
+        itemimages = allitems[i].find_all('img')
+        for a in range(0, len(itemimages)):
+            if(itemimages[a]['src'] != unwanted):
+                startingitems.append("https:" + itemimages[a]['src'])
+
+    images = []
+    imagesizes = []
+    for c in range (0, len(startingitems)):
+        urllib.request.urlretrieve(startingitems[c], str(c) + ".png")
+        images.append(Image.open(str(c) + ".png"))
+        imagesizes.append(images[c].size)
+
+    new_image = Image.new('RGB',(len(images)*imagesizes[0][0], imagesizes[0][1]), (250,250,250))
+
+    for d in range(0, len(images)):
+        new_image.paste(images[d],(d*imagesizes[d][1],0))
+
+    new_image.save("build.png")
+
+
+
+
+

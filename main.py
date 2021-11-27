@@ -45,7 +45,11 @@ async def tierlist(ctx):
 @bot.command()
 async def build(ctx,arg1,arg2):
     b.items(arg1,arg2)
-    await ctx.send(file=discord.File('build.png'))
+    await ctx.send("Başlangıç Eşyaları:")
+    await ctx.send(file=discord.File('starting.png'))
+    await ctx.send("Önerilen Eşyalar:")
+    await ctx.send(file=discord.File('suggested.png'))
+
 
 keep_alive()
 

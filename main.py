@@ -4,26 +4,18 @@ import discord
 from discord.ext import commands
 import tierlists as t
 import builds as b
+import runes as r
 token = os.environ['token']
 
 bot = commands.Bot(command_prefix='!')
 
 
-@bot.command()
-async def pick(ctx, arg1, arg2):
-    await ctx.send('https://www.op.gg/champion/{}/statistics/{}'.format(arg1, arg2))
 
 @bot.command()
-async def counter(ctx, arg1, arg2):
-    await ctx.send('https://tr.op.gg/champion/{}/statistics/{}/matchup'.format(arg1, arg2))
-
-@bot.command()
-async def rune(ctx, arg1, arg2):
-    await ctx.send('https://www.op.gg/champion/{}/statistics/{}/rune'.format(arg1, arg2))
-
-@bot.command()
-async def opgg(ctx, arg1):
-    await ctx.send('https://tr.op.gg/summoner/userName={}'.format(arg1))
+async def rune(ctx,arg1,arg2):
+    r.runes(arg1,arg2)
+    await ctx.send("Rünler:")
+    await ctx.send(file=discord.File('runes.png'))
 
 @bot.command()
 async def tierlist(ctx):

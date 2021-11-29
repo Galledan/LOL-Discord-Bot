@@ -5,6 +5,7 @@ from discord.ext import commands
 import tierlists as t
 import builds as b
 import runes as r
+import profile as p
 token = os.environ['token']
 
 bot = commands.Bot(command_prefix='!')
@@ -32,6 +33,34 @@ async def tierlist(ctx):
     embed.add_field(name= 'Support Tier List' , value=t.suptierlist)
 
     await ctx.send(embed=embed)
+
+@bot.command()
+async def profile(ctx,*args):
+    level,kill,death,assist,profilePic,tier,queue,lp,winNum,loseNum,tierPic,winRate,rank,regionalRank,champListTop5,champListRest,mainLanes = p.pro('%20'.join(args))
+    
+    embed = discord.Embed(title=" ".join(args), color=0x065284)
+    embed.set_thumbnail(url="https:" + profilePic)
+
+    embed.add_field(name='Seviye:', value= f"{level}", inline=False)
+
+    embed.add_field(name= 'Lig:', value= f"{tier} {lp} LP {queue}", inline=False)
+
+    embed.add_field(name='Derece:', value= f"{rank} {regionalRank.strip()}")
+
+    embed.add_field(name='Galibiyet/Mağlubiyet:', value= f"{winNum} Galibiyet / {loseNum} Mağlubiyet", inline=False)
+
+    embed.add_field(name='Kazanma Oranı:', value= f"{winRate}", inline=False)
+
+    embed.add_field(name='Ortalama KDA:', value= f"{kill}/{death}/{assist}", inline=False)
+
+    embed.add_field(name='En Çok Oynadığı Roller:', value= f"{mainLanes}", inline=False)
+
+    embed.add_field(name='En Çok Oynadığı Şampiyonları:', value=f"{champListTop5}")
+
+    embed.add_field(name = '** **', value=f"{champListRest}")
+
+    
+    await ctx.send(embed = embed)
 
 
 @bot.command()

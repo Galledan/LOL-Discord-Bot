@@ -20,6 +20,8 @@ def pro(arg):
     laneDoc = doc.find('div', id='profileRoles')
     allLanes = laneDoc.find_all('div', 'txt name')
     levelText = doc.find('div', 'bannerSubtitle').next_element
+    flexDoc = doc.find('div', 'medium-16 small-20 columns rankLine')
+    flexWinDoc = doc.find('div', 'medium-12 small-12 columns text-right requireTooltip')
     
 
     level = levelText[48:52]
@@ -28,14 +30,19 @@ def pro(arg):
     assist = kdaDoc.find('span' , 'assists').string
     profilePic = profilePicDoc.find('img')['src']
     tier = doc.find('div','leagueTier').string
-    queue = doc.find('span','queue').string
+    flexTier = doc.find('div', 'medium-14 columns leagueTier').string
     lp = doc.find('span','leaguePoints').string
+    flexlp = doc.find('div', 'medium-8 small-4 columns text-right').find('span', 'leaguePoints').string
     winNum = doc.find('span','winsNumber').string
+    flexwinNum = flexWinDoc.find('span','winsNumber').string
     loseNum = doc.find('span','lossesNumber').string
+    flexloseNum = flexWinDoc.find('span','lossesNumber').string
     tierPic = bestLeagueDoc.find('img')['src']
     winRate = doc.find('div', id='graphDD4').string
     rank = doc.find('span', 'highlight').string
+    flexrank = flexDoc.find('span', 'highlight-dark-only').string
     regionalRank = doc.find('a', 'regionalRank').string
+    flexregionalRank = flexDoc.find('div', 'regionalRank').a.string
 
     champListTop5 = []
     champListRest = []
@@ -61,5 +68,5 @@ def pro(arg):
 
     mainLanes = '\n'.join(mainLanes)
     
-
-    return level,kill,death,assist,profilePic,tier,queue,lp,winNum,loseNum,tierPic,winRate,rank,regionalRank,champListTop5,champListRest,mainLanes
+    
+    return level,kill,death,assist,profilePic,tier,flexTier,lp,flexlp,winNum,flexwinNum,loseNum,flexloseNum,tierPic,winRate,rank,flexrank,regionalRank,flexregionalRank ,champListTop5,champListRest,mainLanes

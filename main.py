@@ -36,18 +36,30 @@ async def tierlist(ctx):
 
 @bot.command()
 async def profile(ctx,*args):
-    level,kill,death,assist,profilePic,tier,queue,lp,winNum,loseNum,tierPic,winRate,rank,regionalRank,champListTop5,champListRest,mainLanes = p.pro('%20'.join(args))
+    level,kill,death,assist,profilePic,tier,flexTier,lp,flexlp,winNum,flexwinNum,loseNum,flexloseNum,tierPic,winRate,rank,flexrank,regionalRank,flexregionalRank ,champListTop5,champListRest,mainLanes = p.pro('%20'.join(args))
     
     embed = discord.Embed(title=" ".join(args), color=0x065284)
     embed.set_thumbnail(url="https:" + profilePic)
 
     embed.add_field(name='Seviye:', value= f"{level}", inline=False)
 
-    embed.add_field(name= 'Lig:', value= f"{tier} {lp} LP {queue}", inline=False)
+    embed.add_field(name='TEK/ÇİFT:', value='** **')
+
+    embed.add_field(name='Lig:', value= f"{tier} {lp} LP", inline=False)
 
     embed.add_field(name='Derece:', value= f"{rank} {regionalRank.strip()}")
 
     embed.add_field(name='Galibiyet/Mağlubiyet:', value= f"{winNum} Galibiyet / {loseNum} Mağlubiyet", inline=False)
+    
+    embed.add_field(name='ESNEK', value='** **')
+
+    embed.add_field(name= 'Lig:', value= f"{flexTier.strip()} {flexlp} LP", inline=False)
+
+    embed.add_field(name='Derece:', value= f"{flexrank} {flexregionalRank.strip()}")
+
+    embed.add_field(name='Galibiyet/Mağlubiyet:', value= f"{flexwinNum} Galibiyet / {flexloseNum} Mağlubiyet", inline=False)
+
+    embed.add_field(name='-------------------------------------------', value='** **')
 
     embed.add_field(name='Kazanma Oranı:', value= f"{winRate}", inline=False)
 

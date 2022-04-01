@@ -7,7 +7,8 @@ import sys
 
 def items(arg1,arg2):
     url = 'https://www.op.gg/champion/{}/statistics/{}'.format(arg1, arg2)
-   
+    
+    result = requests.get(url, headers=headers)
     doc= BeautifulSoup(result.content, "html.parser")
 
     allitems = doc.find_all('td', 'champion-overview__data champion-overview__border champion-overview__border--first')

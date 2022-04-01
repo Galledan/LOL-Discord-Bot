@@ -7,11 +7,7 @@ def pro(arg):
 
     url = "https://www.leagueofgraphs.com/tr/summoner/tr/{}".format(arg)
 
-    headers = {
-        'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36 OPR/80.0.4170.91'
-    }
-
-    result = requests.get(url, headers=headers)
+    result = requests.get(url)
     doc= BeautifulSoup(result.content, "html.parser")
     bestLeagueDoc = doc.find('div', 'best-league')
     profilePicDoc = doc.find('div' ,'pageBanner img-align-block')
